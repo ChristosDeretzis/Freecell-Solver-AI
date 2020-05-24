@@ -6,11 +6,11 @@ CardType = {
     "DIAMONDS": 3
 }
 
-CardColor = {
-    "BLACK": [0, 1],
-    "RED": [2, 3]
-}
 
+CardColor = {
+    "BLACK": [0, 1], # Spades and Clubs are black
+    "RED": [2, 3] # Hearts and diamonds are white
+}
 
 
 def find_type_of_card(card):
@@ -56,6 +56,7 @@ def stacks_rule(cardA, cardB):
         else:
             return 0 # The move between cards is not allowed
 
+# Checks whether a card can be put in the foundation list
 def foundationRule(value_of_card, foundationList):
     if not foundationList:
         foundationValue = -1

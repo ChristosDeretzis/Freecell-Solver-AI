@@ -1,0 +1,103 @@
+102 
+foundation D0 
+foundation H0 
+foundation D1 
+freecell S12 
+foundation D2 
+stack D9 C10 
+stack S9 H10 
+freecell S11 
+foundation D3 
+freecell D8 
+foundation D4 
+freecell C5 
+foundation C0 
+stack C5 D6 
+freecell C4 
+stack S3 H4 
+foundation C1 
+foundation H1 
+foundation C2 
+stack S6 D7 
+source D11 
+stack H5 S6 
+foundation D5 
+stack D8 S9 
+freecell C5 
+foundation D6 
+stack C4 H5 
+freecell D11 
+source S12 
+freecell S1 
+stack D11 S12 
+freecell D12 
+foundation S0 
+foundation S1 
+stack D11 C12 
+freecell S12 
+source D12 
+stack S11 D12 
+freecell D8 
+freecell S9 
+stack H10 S11 
+foundation S2 
+foundation S3 
+stack S9 H10 
+freecell D9 
+stack C10 H11 
+stack H9 C10 
+foundation S4 
+stack D8 S9 
+freecell S7 
+foundation S5 
+stack S7 H8 
+freecell H7 
+source C4 
+stack H3 C4 
+stack C8 H9 
+stack H5 C6 
+foundation S6 
+foundation D7 
+foundation C3 
+foundation S7 
+foundation D8 
+foundation D9 
+freecell H8 
+source H3 
+foundation C4 
+foundation C5 
+freecell H4 
+source H5 
+foundation C6 
+stack H7 C8 
+freecell C9 
+foundation D10 
+foundation H2 
+foundation H3 
+foundation H4 
+foundation H5 
+foundation D11 
+source C12 
+foundation H6 
+foundation H7 
+foundation H8 
+source C8 
+foundation H9 
+source S9 
+foundation H10 
+source C10 
+foundation H11 
+freecell S10 
+foundation S8 
+foundation C7 
+foundation C8 
+foundation C9 
+foundation C10 
+foundation S9 
+foundation S10 
+foundation S11 
+foundation S12 
+foundation C11 
+foundation D12 
+foundation H12 
+foundation C12 

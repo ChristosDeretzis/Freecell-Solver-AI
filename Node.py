@@ -30,6 +30,7 @@ class TreeNode(object):
                 self.children.append(TreeNode(state[0], self, state[1], f=0, g=g, h=0))
 
 
+    """ This function finds all the possible moves in the game"""
     def find_possible_moves(self):
         state = []
 
@@ -57,8 +58,9 @@ class TreeNode(object):
                     current_stack = self.game["stack"][j]
 
                     # if the current stack is empty, then put the foundation card to that empty stack
+                    # else, check if the card can be put to the stack and add the card to the stack
                     if not current_stack:
-                        new_game, move = self.move_from_freecell_empty_stack(i, j)
+                        new_game, move = self.move_from_freecell_to_empty_stack(i, j)
                         state.append([new_game, move])
                         continue
                     elif game.stacks_rule(current_stack[-1], self.game["freecell"][i]) is 1:
@@ -66,6 +68,7 @@ class TreeNode(object):
                         state.append([new_game, move])
                         continue
             #     # END MOVE CARD FROM STACK TO STACK
+
         emptyFreecellExaminined = False
         for i in range(4):
             if self.game["freecell"][i] is None:
@@ -94,7 +97,7 @@ class TreeNode(object):
                     continue
                 # END MOVE CARD FROM STACK TO FOUNDATION
 
-                # MOVE CARD FROM STACK TO ANOTHER STACK
+            # MOVE CARD FROM STACK TO ANOTHER STACK
             for j in range(i+1, 9):
                 sourceStackId = 0
                 targetStackId = 0
@@ -146,7 +149,7 @@ class TreeNode(object):
 
         return copy_game, ("foundation", card)
 
-    def move_from_freecell_empty_stack(self, freecell_position, stack_number):
+    def move_from_freecell_to_empty_stack(self, freecell_position, stack_number):
         copy_game = copy.deepcopy(self.game)
 
         freecell_card = copy_game["freecell"][freecell_position]
@@ -194,13 +197,11 @@ class TreeNode(object):
 
         return copy_game, move
 
-
-
-
-
     def move_from_stack_to_freecell(self, stackNumber, freecell_number):
         copyGame = copy.deepcopy(self.game)
+
         card = copyGame["stack"][stackNumber].pop()
+
         copyGame["freecell"][freecell_number] = card
 
         return copyGame, ("freecell", card)
@@ -211,6 +212,7 @@ class TreeNode(object):
         card = copyGame["stack"][stackNumber].pop()
 
         copyGame["foundation"][foundation_list].append(card)
+
         return copyGame, ("foundation", card)
 
     def is_goal(self):
@@ -221,6 +223,7 @@ class TreeNode(object):
                 return False
         return True
 
+    # this functions finds all the steps that need to be done in order to find the solution
     def extract_solution(self):
 
         path = []
@@ -232,13 +235,13 @@ class TreeNode(object):
 
         return path
 
+    """ The heuristic function gives more emphasis to the cards that are not in the foundation and less to the cards that are not in the correct order"""
     def heuristic(self):
         copy_game = copy.deepcopy(self.game)
 
         # The higher the value of a card in the freecell or any stack that is not in the foundation
         # the lower the penalty it gets
         cards_not_in_foundation_penalty = 0
-
         for card in copy_game["freecell"]:
             if card is not None:
                 value_of_card = game.find_value_of_card(card)
@@ -255,10 +258,10 @@ class TreeNode(object):
         for key in copy_game["stack"]:
             cards_order_penalty += self.ordering_penalty(copy_game["stack"][key])
 
-        return int(0.75*cards_not_in_foundation_penalty + 0.25*cards_order_penalty)
+        return int(0.75*cards_not_in_foundation_penalty + 0.25*cards_order_penalty )
 
     # This functions calculates the penalty
-    # for the stacks that
+    # for the for 2 cards in the stack. If 2 consecutive cards do not follow the stack rule, then add 1 to the penalty
     def ordering_penalty(self, stack):
         penalty = 0;
 
@@ -271,11 +274,9 @@ class TreeNode(object):
         return penalty
 
     def __lt__(self, other):
-        """ Larger than operation of TreeNode object. """
         return self.f < other.f
 
     def __eq__(self, other):
-        """ Equal operation on TreeNode object. """
         if other is not None:
             return self.game == other.game
 

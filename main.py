@@ -4,6 +4,8 @@ import utils
 import os
 import sys
 
+# This is the upper search function of the game and it starts the search of the solution
+# based on the method and the queue we use
 def search(queue, method, initial_game):
     root = TreeNode(initial_game, None, None, 0, 0, 0)
 
@@ -24,7 +26,7 @@ def search(queue, method, initial_game):
         if current.is_goal():
             return current
 
-
+        # If the state of the game has already been visited, then continue
         if str(current.game) in visited_states:
             continue
 
@@ -39,15 +41,18 @@ def search(queue, method, initial_game):
             print(child.game)
         print("===============================")
     return None
-    print(time.time() - start)
 
 def main():
     start = time.time()
     os.system('cls' if os.name == 'nt' else 'clear')
 
+    # Handle the elements of the input.
+
+    # If we do not specify the name of the output file
     if len(sys.argv) == 3:
         method = sys.argv[1]
         input_file = sys.argv[2]
+    # If we specify the name of the output file
     elif len(sys.argv) == 4:
         method = sys.argv[1]
         input_file = sys.argv[2]
@@ -57,8 +62,11 @@ def main():
         print('Search algorithm: depth (Depth First), breadth (Breadth First), best (Best First), astar (A*)')
         sys.exit()
 
+    # Initialize the queue based on the method we use
     search_queue = utils.METHODS[method]
 
+
+    # Read the data and initialize the problem
     data = utils.loadProblem(input_file)
     initial_game = utils.initializeProblem(data)
 
@@ -66,6 +74,7 @@ def main():
 
     solution_node = search(search_queue, method, initial_game)
 
+    # If the solution has been found, then write to a file the steps of the solution
     if solution_node is not None:
         print("################## SOLUTION FOUND ##################### \n")
         print("Number of moves: {}".format(solution_node.g))
@@ -75,6 +84,7 @@ def main():
         number_of_solution_steps = solution_node.g
         solution_path = solution_node.extract_solution()
 
+        # Create a name of the output file based on the method we used and the name of the input file
         if len(sys.argv) == 3:
             try:
                 file_name = input_file.split("\\")[-1]
